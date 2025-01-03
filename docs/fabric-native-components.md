@@ -2,7 +2,7 @@
 
 # Fabric Native Components
 
-A Fabric Native Component is a Native Component rendered on the screen using the [Fabric Renderer](https://reactnative.dev/architecture/fabric-renderer). Using Fabric Native Components instead of Legacy Native Components allows us to reap all the of the **New Architecture**:
+A Fabric Native Component is a Native Component rendered on the screen using the [Fabric Renderer](https://reactnative.dev/architecture/fabric-renderer). Using Fabric Native Components instead of Legacy Native Components allows us to reap all the benefits of the **New Architecture**:
 
 - Strongly typed interfaces that are consistent across platforms.
 - The ability to write your code in C++, either exclusively or integrated with another native platform language, hence reducing the need to duplicate implementations across platforms.
@@ -411,7 +411,8 @@ yarn add ../RTNCenteredText
 cd ..
 node MyApp/node_modules/react-native/scripts/generate-codegen-artifacts.js \
   --path MyApp/ \
-  --outputPath RTNCenteredText/generated/
+  --outputPath RTNCenteredText/generated/ \
+  --targetPlatform ios
 ```
 
 This script first adds the `RTNCenteredText` module to the app with `yarn add`. Then, it invokes **Codegen** via the `generate-codegen-artifacts.js` script.
@@ -502,6 +503,8 @@ The most important call is to the `RCT_EXPORT_MODULE`, which is required to expo
 Then, you have to expose the `text` property for the Fabric Native Component. This is done with the `RCT_EXPORT_VIEW_PROPERTY` macro, specifying a name and a type.
 
 > [!Note]
+> Unlike legacy native components, properties are actually handled via `updateProps` C++ code, see below.
+> Those macros are needed for bridge compatibility. With bidgeless mode you can omit them entirely.
 > There are other macros that can be used to export custom properties, emitters, and other constructs. You can view the code that specifies them [here](https://github.com/facebook/react-native/blob/main/packages/react-native/React/Views/RCTViewManager.h).
 
 ##### RTNCenteredText.h
@@ -950,7 +953,7 @@ If the package was previously added to your app, you will need to update it:
 
 ```sh
 cd MyApp
-yarn upgrade rtn-centered-text
+yarn add
 ```
 
 ### iOS

@@ -230,7 +230,7 @@ The **Codegen** also creates a `ComponentDescriptor.h`, which is required to get
 #### DESCRIPTION
 
 This command runs `react-native-codegen` for your project.
-The Codegen must be configured as described in [Configure Codegen](./enable-libraries.md#configure-codegen).
+The Codegen must be configured as described in [Configure Codegen](./enable-libraries-prerequisites.md#configure-codegen).
 
 The following options are available:
 
@@ -278,7 +278,7 @@ Here is how you can enable this setup:
 - Update your `package.json` to include the generated code.
 - Update your [podspec](./turbo-modules.md#ios-create-the-podspec-file) to include the generated code.
 - Update your [build.gradle file](./turbo-modules.md#the-buildgradle-file) to include the generated code.
-- You may also want to add the generated code to `.gitignore`.
+- Update `cmakeListsPath` in `react-native.config.js` ([example](https://github.com/facebook/react-native/blob/3c17beafe387fb4966055d5dfcec62bef537e0f7/packages/react-native-popup-menu-android/react-native.config.js#L12)) so that Gradle doesn't look for `CMakeLists` file in the `build` directory but instead in your `outputDir`.
 
 ---
 
